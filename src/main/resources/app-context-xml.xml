@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="cat" class="annotation.Cat" p:name="Vaska"/>
+    <bean id="bird" class="annotation.Bird" p:name="simpleBird"/>
+    <bean id="getAlfaDog" class="annotation.Dog" p:name="AlfaDog"/>
+    <bean id="secondDog" class="annotation.Dog" p:name="SecondDog"/>
+    <bean id="someDog" class="annotation.Dog" p:name="Dog"/>
+    <bean id="man" class="annotation.Man"
+          p:dog-ref="getAlfaDog"
+          p:dog1-ref="someDog"
+          p:bird-ref="bird"
+          c:cat-ref="cat">
+        <property name="dogs">
+            <list>
+                <ref bean="getAlfaDog"/>
+                <ref bean="secondDog"/>
+                <ref bean="someDog"/>
+            </list>
+        </property>
+        <property name="pets">
+            <set>
+                <ref bean="cat"/>
+                <ref bean="bird"/>
+                <ref bean="getAlfaDog"/>
+                <ref bean="secondDog"/>
+                <ref bean="someDog"/>
+            </set>
+        </property>
+        <property name="mapDogs">
+            <map>
+                <entry key="getAlfaDog" value-ref="getAlfaDog"/>
+                <entry key="secondDog" value-ref="secondDog"/>
+                <entry key="someDog" value-ref="someDog"/>
+            </map>
+        </property>
+    </bean>
+</beans>
