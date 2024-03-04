@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+    <context:component-scan base-package="ru.job4j.annotationbased"/>
+
+    <bean id="dogBean" name="dog" class="ru.job4j.annotationbased.Dog">
+        <constructor-arg name="name" value="Sharik" />
+    </bean>
+
+    <bean id="catBean" name="cat" class="ru.job4j.annotationbased.Cat" factory-method="createCat">
+        <constructor-arg name="name" value="Vaska" />
+    </bean>
+
+    <bean id="parrotBean" name="parrot" factory-bean="birdFactory" factory-method="getParrot">
+        <constructor-arg value="Kesha"/>
+    </bean>
+
+    <bean id="canaryBean" name="canary" factory-bean="birdFactory" factory-method="getCanary">
+        <constructor-arg value="Roza"/>
+    </bean>
+</beans>

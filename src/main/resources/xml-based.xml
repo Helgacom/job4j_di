@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="dogBean"
+          name="dog"
+          class="ru.job4j.xmlbased.Dog"
+          scope="prototype"
+          lazy-init="true"
+          init-method="postConstruct"
+          destroy-method="preDestroy">
+        <constructor-arg name="name" value="Sharik" />
+    </bean>
+
+    <bean id="catBean"
+          name="cat"
+          class="ru.job4j.xmlbased.Cat"
+          factory-method="createCat">
+        <constructor-arg name="name" value="Vaska" />
+    </bean>
+
+    <bean id="birdFactoryBean"
+          class="ru.job4j.xmlbased.BirdFactory"/>
+
+    <bean id="parrotBean"
+          name="parrot"
+          factory-bean="birdFactoryBean"
+          factory-method="getParrot">
+        <constructor-arg value="Kesha"/>
+    </bean>
+
+    <bean id="canaryBean"
+          name="canary"
+          factory-bean="birdFactoryBean"
+          factory-method="getCanary">
+        <constructor-arg value="Roza"/>
+    </bean>
+
+    <bean id="personBean"
+          name="person"
+          class="ru.job4j.xmlbased.Person"
+          lazy-init="true">
+        <constructor-arg name="canary" ref="canary"/>
+        <constructor-arg name="cat" ref="cat"/>
+        <constructor-arg name="dog" ref="dog"/>
+        <constructor-arg name="parrot" ref="parrot"/>
+        <constructor-arg name="name" value="Man"/>
+    </bean>
+</beans>
